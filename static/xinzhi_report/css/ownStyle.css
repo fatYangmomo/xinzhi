@@ -1,0 +1,52 @@
+.myheader{
+	width: 100%;
+	height: 80px;
+	background-color: #1E90FF;
+	line-height: 80px;
+	color: #fff;
+}
+.mytitle{
+	margin-left: 50px;
+	font-size: 1.5em;
+}
+.container{
+	width: 100%;
+	text-align: center;
+	/*border:1px solid red;*/
+}
+.footer{
+	
+}
+.bottom_bar{
+	position: absolute;
+	width: 100%;
+	height: 40px;
+	background-color: #444444;
+	bottom: 0px;
+	z-index: 1;
+	line-height: 40px;
+}
+.inline-block{
+	display: inline-block;
+}
+.b_red{
+	border:1px solid red;
+}
+.mt-5{
+	margin-top: 5px;
+}
+.mt-10{
+	margin-top: 10px;
+}
+.mb-5{
+	margin-bottom: 5px;
+}
+.mb-10{
+	margin-bottom: 10px;
+}
+.c_red{
+	color: red;
+}
+.text_right{
+	text-align: right;
+}

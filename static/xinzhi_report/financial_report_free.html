@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--自选界面*/-->
+    <title>信致人工智能分析企业财报系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="css/ownStyle.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />   
+    <style type="text/css">
+    	.btn{
+    		width: 160px;
+    		height: 30px;
+    		font-size: 14px;
+    		line-height: 14px;
+    		margin-left: 20px;
+    	}
+    	select{
+    		
+    	}
+    	.search-box{
+    		margin-bottom: 0;
+    	}
+    	.table .opt{
+    		margin-bottom: 0;
+    	}
+    	.kv-item{
+    		float: left;
+    		margin-bottom: 0;
+    	}
+    	#div_group{
+    		float: left;
+    	}
+    	.group{
+    		background-color: #DCDCDC;
+    		border: 1px solid #C1C1C1;
+    		border-bottom: hidden;
+    		margin: 0 5px 0 0;
+    		width: 90px;
+    		height: 30px;
+    		font-size: 13px;
+    	}
+    	.btn-choose{
+    		background-color: #F5F5F5;
+    	}
+    	.btn-small{
+    		width: 60px;
+    		height: 25px;
+    	}
+    	.kv-item input[type=text]{
+    		width: 100px;
+    		padding: 0 5px;
+    	}
+    	#group-add{
+    		display: none;
+    	}
+    </style>
+</head> 
+
+<body class="home-page">
+    <div class="myheader">
+    	<span class="mytitle">信致人工智能分析企业财报系统</span>
+    </div>
+    <div id="container" class="div_data">
+    	<div id="hd"></div>
+	    <div id="bd">
+	    	<div id="main">
+            	<div class="search-box ue-clear">
+	            	<div class="search-area">
+	            		<div id="div_group">
+	                        <div class="kv-item-content">
+	                            <button class="group btn-choose">组合1</button>
+	                        </div>
+	                        <div class="kv-item-content">
+	                            <button class="group">组合2</button>
+	                        </div>
+	                    </div>
+                        <div class="kv-item-content">
+	                        <button class="group" onclick="group_add(1)"><i class="fa fa-plus"></i>&nbsp;组合</button>
+                        </div>
+                        <div class="kv-item" id="group-add">
+	                        <input type="text" id="group-name"/>
+	                        <button class="group btn-small" onclick="group_add(2)">确定</button>
+                        </div>
+	                </div>
+	            </div>
+			    <div class="table">
+	            	<div class="opt ue-clear"> 
+	                	<span class="optarea">
+	                        <a href="javascript:;" class="delete">
+	                            <i class="icon"></i>
+	                            <span class="text">删除</span>
+	                        </a>
+	                    </span>
+	                    <div class="search-box search-area">
+		                    <div class="kv-item mt-5">
+	                            <select>
+	                                <option>移动到</option>
+	                                <option>组合1</option>
+	                                <option>组合2</option>
+	                            </select>
+	                        </div>
+                        </div>
+	                </div>
+	                
+	                <div class="grid"></div>
+	                
+	                <div class="pagination"></div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    <!-- Javascript -->          
+    <!--<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+	<script type="text/javascript" src="js/jquery.select.js"></script>
+	<script type="text/javascript" src="js/core.js"></script>
+	<script type="text/javascript" src="js/jquery.pagination.js"></script>
+	<script type="text/javascript" src="js/jquery.grid.js"></script>
+    <script type="text/javascript">
+    	$('select').select();
+		var head = [{
+				label: '排名',
+				width: 30,
+//				sortable: 'default',
+				name: 'id'	
+			},{
+				label:'股票代码',
+				width: 50,
+//				sortable: 'default',
+				name:'code'	
+			},{
+				label:'股票名称',
+				width:100	
+			},{
+				label: '报告日期',
+				width: 100	
+			},{
+				label: '总股本',
+				minWidth: 150	
+			},{
+				label: '营业收入',
+				width: 100	
+			},{
+				label: '净利润',
+				width:80	
+			},{
+				label: '营业收入增长率',
+				width:100	
+			},{
+				label: '净利润增长率',
+				width:100	
+			},{
+				label: '每股净资产',
+				width:100	
+			},{
+				label: '净资产收益率',
+				width:100	
+			},{
+				label: '每股收益',
+				width:100	
+			},{
+				label: '当前价格',
+				width:100	
+			},{
+				label: '市盈率',
+				width:100	
+			},{
+				label: '市净率',
+				width:100	
+			}];
+			
+		var oper = [{label:'加入自选',onclick: function(){
+					alert('加入自选');
+				}}]
+		var tbody = [
+					["1","000000","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["2","000001","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["3","000002","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["4","000003","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["5","000004","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["6","000005","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["7","000006","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["8","000007","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["9","000008","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["10","000009","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["11","000010","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["12","000011","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["13","000012","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["14","000013","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["15","000014","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper]]
+					
+		$('.grid').Grid({
+			thead: head,
+			tbody: null,
+			height:500,
+			checkbox: {
+				single:true	
+			},
+			operator: {
+				type : "normal",
+				width : 100	
+			},
+			sortCallBack : function(name,index,type){
+				table_sort(name,index,type);
+			}
+		});
+	
+	$('.grid').Grid('addLoading');
+	
+	//
+	setTimeout(function(){
+		$('.grid').Grid('setData',tbody, head);
+	},2000)
+	
+	$('.pagination').pagination(100,{
+		callback: function(page){
+			alert(page);
+		},
+		display_msg: false
+	});
+	
+//	$('.search-box input[type=radio]').click(function(e) {
+//      if($(this).prop('checked')){
+//			if($(this).attr('data-define') === 'define'){
+//				$('.define-input').show();
+//			}else{
+//				$('.define-input').hide();
+//			}
+//		}
+//  });
+    function table_sort(name,index,type){
+    	alert(name+","+index+','+type);
+    	$('.grid').Grid('addLoading');
+    	var tbody = [
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper]]
+    	setTimeout(function(){
+			$('.grid').Grid('setData',tbody, head);
+		},2000)
+    }
+    $(function(){
+    	
+    });
+    //点击组合
+    $("#div_group .group").click(function(){
+    	$("#div_group .group").each(function(){
+    		$(this).removeClass("btn-choose");
+    	});
+    	$(this).addClass("btn-choose");
+    });
+    //添加组合
+    function group_add(oper){
+    	if(oper==1)
+    		$("#group-add").show();
+		else{
+			var group_name = $("#group-name").val();
+			if(group_name!=""){
+				var html = $("#div_group").html();
+				html += '<div class="kv-item-content">';
+				html += '<button class="group">'+group_name+'</button>';
+				html += '</div>';
+				$("#div_group").html(html);
+				$("#group-name").val("");
+			}
+			$("#group-add").hide();
+			//重新绑定事件
+			$("#div_group .group").click(function(){
+		    	$("#div_group .group").each(function(){
+		    		$(this).removeClass("btn-choose");
+		    	});
+		    	$(this).addClass("btn-choose");
+		    });
+		}
+    }
+    </script>
+</body>
+</html> 
+
+

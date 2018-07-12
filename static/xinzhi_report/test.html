@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>登录</title>
+<meta charset="utf-8">
+<style>
+	
+</style>
+</head>
+<body>
+<div id="div_login">
+	<input id="user_email" type="hidden">
+    <form class="form form-horizontal">
+      <div class="row cl">
+        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+        <div class="formControls col-xs-8">
+          <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L" value="">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-xs-8">
+          <input id="password" name="password" type="password" placeholder="密码" class="input-text size-L" value="">
+        </div>
+      </div>
+      <div class="row cl">
+        <div class="formControls col-xs-8 col-xs-offset-3">
+          <input name="" type="button" class="btn btn-success radius" value="&nbsp;登&nbsp;&nbsp;录&nbsp;" 
+          	onclick="check();">
+          <a href="javascript:go_back();" class="btn btn-default radius">&nbsp;取&nbsp;&nbsp;消&nbsp;</a>
+          <a id="forget_password" href="javascript:password_forget();">忘记密码</a>
+          <br />
+        </div>
+      </div>
+    </form>
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+function check(){
+	var username=document.getElementById("username").value;
+	var password=document.getElementById("password").value;
+	if(username==""||password==""){
+		return;
+	} else{
+		//console.log(hash);
+		$.ajax({
+			type: 'GET',
+			url: 'http://127.0.0.1:8000/test/test',
+			data:{
+				username:username,
+				password:password,
+			},
+			dataType: 'json',
+			success: function(data){
+				console.log(data);
+				if(data.code==0){
+					
+				} else if(data.code==1){
+					console.log(data);
+				} else{
+					console.log(data);
+					
+				}
+			}
+		});
+	}
+}
+</script>
+</body>
+</html>

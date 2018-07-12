@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!--财报数据界面*/-->
+    <title>信致人工智能分析企业财报系统</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="css/ownStyle.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />   
+    <style type="text/css">
+    	.btn{
+    		width: 160px;
+    		height: 30px;
+    		font-size: 14px;
+    		line-height: 14px;
+    		margin-left: 20px;
+    	}
+    	select{
+    		
+    	}
+    	tr:hover{
+    		background-color: #F5F5F5; 
+    	}
+    	#stock_code{
+    		width: 100px;
+    		margin-bottom: 2px;
+    	}
+    	#stock_table{
+    		width: 300px;
+    		height: 200px;
+    		position: absolute;
+    		border: 1.5px solid #DCDCDC;
+    		z-index: 10;
+    		background-color: #fff;
+    		padding-bottom: 2px;
+    		overflow-y: scroll;
+    		overflow-x: hidden;
+    		display: none;
+    	}
+    	#stock_table table{
+    		margin-left: 0;
+    	}
+    	#stock_table thead tr{
+    		background-color: #DCDCDC;
+    	}
+    	#stock_table td{
+    		text-align: center;
+    		width: 100px;
+    	}
+    	/*滚动条样式*/
+	    #stock_table::-webkit-scrollbar {/*滚动条整体样式*/
+	        width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+	        height: 6px;
+	    }
+	    #stock_table::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	        border-radius: 5px;
+	        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	        background: rgba(0,0,0,0.2);
+	    }
+	    #stock_table::-webkit-scrollbar-track {/*滚动条里面轨道*/
+	        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	        border-radius: 0;
+	        background: rgba(0,0,0,0.1);
+	    }
+    </style>
+</head> 
+
+<body class="home-page">
+    <div class="myheader">
+    	<span class="mytitle">信致人工智能分析企业财报系统</span>
+    </div>
+    <div id="container" class="div_data">
+    	<div id="hd"></div>
+	    <div id="bd">
+	    	<div id="main">
+	            <div class="table">
+	            	<div class="opt ue-clear">
+	                	<div class="search-box ue-clear mt-5">
+			            	<div class="search-area">
+			                    <div class="kv-item ue-clear">
+			                        <label>报告日期：</label>
+			                        <div class="kv-item-content">
+			                            <select>
+			                                <option>第一季度报</option>
+			                                <option>半年报</option>
+			                                <option>第三季度报</option>
+			                                <option>年报</option>
+			                            </select>
+			                        </div>
+			                        <label>股票板块:</label>
+			                        <div class="kv-item-content">
+			                            <select>
+			                                <option>全部</option>
+			                                <option>上证50</option>
+			                                <option>沪深300</option>
+			                                <option>MSCI</option>
+			                                <option>自选</option>
+			                            </select>
+			                        </div>
+			                    
+			                        <label>股票代码:</label>
+			                        <div class="kv-item-content">
+			                            <input type="text" id="stock_code"/>
+			                            <div id="stock_table" class="">
+			                            	<table>
+			                            		<thead><tr><td>选项</td><td>代码</td><td>名称</td></tr></thead>
+			                            		<tbody>
+			                            			<!--<tr>
+			                            				<td>000000</td>
+			                            				<td>000000</td>
+			                            				<td>信致</td>
+			                            			</tr>
+			                            			<tr>
+			                            				<td>000001</td>
+			                            				<td>000001</td>
+			                            				<td>信致1</td>
+			                            			</tr>-->
+			                            		</tbody>
+			                            	</table>
+			                            </div>
+			                        </div>
+			                        <div class="search-button inline-block">
+					                	<button class="btn btn-cta-primary">搜索</button>
+					                </div>
+					            </div>
+			                </div>
+			             </div>
+	                	<!--<span class="optarea">
+	                        <a href="javascript:;" class="add">
+	                            <i class="icon"></i>
+	                            <span class="text">添加</span>
+	                        </a>
+	                        <a href="javascript:;" class="delete">
+	                            <i class="icon"></i>
+	                            <span class="text">删除</span>
+	                        </a>
+	                        
+	                        <a href="javascript:;" class="statistics">
+	                            <i class="icon"></i>
+	                            <span class="text">统计</span>
+	                        </a>
+	                        
+	                        <a href="javascript:;" class="config">
+	                            <i class="icon"></i>
+	                            <span class="text">配置</span>
+	                        </a>
+	                    </span>-->
+	                </div>
+	                
+	                <div class="grid"></div>
+	                
+	                <div class="pagination"></div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+    <!-- Javascript -->          
+    <!--<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/global.js"></script>
+	<script type="text/javascript" src="js/jquery.select.js"></script>
+	<script type="text/javascript" src="js/core.js"></script>
+	<script type="text/javascript" src="js/jquery.pagination.js"></script>
+	<script type="text/javascript" src="js/jquery.grid.js"></script>
+    <script type="text/javascript">
+    	$('select').select();
+		var head = [{
+				label: '排名',
+				width: 30,
+//				sortable: 'default',
+				name: 'id'	
+			},{
+				label:'股票代码',
+				width: 50,
+//				sortable: 'default',
+				name:'code'	
+			},{
+				label:'股票名称',
+				width:100	
+			},{
+				label: '报告日期',
+				width: 100	
+			},{
+				label: '总股本',
+				minWidth: 150	
+			},{
+				label: '营业收入',
+				width: 100	
+			},{
+				label: '净利润',
+				width:80	
+			},{
+				label: '营业收入增长率',
+				width:100	
+			},{
+				label: '净利润增长率',
+				width:100	
+			},{
+				label: '每股净资产',
+				width:100	
+			},{
+				label: '净资产收益率',
+				width:100	
+			},{
+				label: '每股收益',
+				width:100	
+			},{
+				label: '当前价格',
+				width:100	
+			},{
+				label: '市盈率',
+				width:100	
+			},{
+				label: '市净率',
+				width:100	
+			}];
+			
+		var oper = [{label:'加入自选',onclick: function(){
+					alert('加入自选');
+				}}]
+		var tbody = [
+					["1","<a href='javascript:alert(0);'>000000</a>","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["2","000001","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["3","000002","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["4","000003","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["5","000004","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["6","000005","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["7","000006","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["8","000007","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["9","000008","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["10","000009","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["11","000010","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["12","000011","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["13","000012","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["14","000013","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
+					["15","000014","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper]]
+					
+		$('.grid').Grid({
+			thead: head,
+			tbody: null,
+			height:500,
+//			checkbox: {
+//				single:true	
+//			},
+			operator: {
+				type : "normal",
+				width : 80	
+			},
+			sortCallBack : function(name,index,type){
+				table_sort(name,index,type);
+			}
+		});
+	
+	$('.grid').Grid('addLoading');
+	
+	//
+	setTimeout(function(){
+		$('.grid').Grid('setData',tbody, head);
+	},2000)
+	
+	$('.pagination').pagination(100,{
+		callback: function(page){
+			alert(page);
+		},
+		display_msg: false
+	});
+	
+//	$('.search-box input[type=radio]').click(function(e) {
+//      if($(this).prop('checked')){
+//			if($(this).attr('data-define') === 'define'){
+//				$('.define-input').show();
+//			}else{
+//				$('.define-input').hide();
+//			}
+//		}
+//  });
+    function table_sort(name,index,type){
+    	alert(name+","+index+','+type);
+    	$('.grid').Grid('addLoading');
+    	var tbody = [
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
+			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
+			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper]]
+    	setTimeout(function(){
+			$('.grid').Grid('setData',tbody, head);
+		},2000)
+    }
+    //初始化
+    stock_list = []
+    $(function(){
+    	var s = {"code":"000000","name":"信致"}
+    	stock_list.push(s);
+    	s = {"code":"000001","name":"信致1"}
+    	stock_list.push(s);
+    	s = {"code":"000002","name":"信致2"}
+    	stock_list.push(s);
+    	s = {"code":"000331","name":"信致3"}
+    	stock_list.push(s);
+    	s = {"code":"022001","name":"信致4"}
+    	stock_list.push(s);
+    	s = {"code":"005501","name":"信致5"}
+    	stock_list.push(s);
+    	for(var i=100000;i<100100;i++){
+	    	s = {"code":i.toString(),"name":"信致"+i};
+	    	stock_list.push(s);
+    	}
+    });
+    //点击任意位置隐藏
+    $(document).click(function(){
+	    $("#stock_table").hide();
+	});
+	//防止事件冒泡
+	$("#stock_table").click(function(event){
+	    event.stopPropagation();
+	});
+	//股票代码框的键入事件
+	$("#stock_code").keyup(function(){
+		var search_code = $(this).val();
+		//获取符合的集合
+		var s_list = get_stock_list(search_code);
+		var html = "";
+		var pos = -1;
+		var c_bef = "";
+		var c_aft = "";
+		$.each(s_list,function(i,n){
+			code = n.code;
+			pos = code.indexOf(search_code);
+			c_bef = code.substring(0,pos)
+			c_aft = code.substr(pos+search_code.length,code.length);
+			c_choose = c_bef + "<span class='c_red'>" +search_code+ "</span>" +c_aft;
+			html += "<tr>";
+			html += "<td>"+c_choose+"</td>";
+			html += "<td>"+n.code+"</td>";
+			html += "<td>"+n.name+"</td>";
+			html += "</tr>";
+		});
+		$("#stock_table tbody").html(html);
+		$("#stock_table").show();
+		//重新为tr绑定事件
+		tr_click();
+	});
+	//为tr绑定事件
+	function tr_click(){
+		$("#stock_table tbody tr").click(function(){
+			var stock_code = $(this).children('td')[1].innerHTML;
+			$("#stock_code").val(stock_code);
+		});
+	}
+	//过滤出符合条件股份集合
+	function get_stock_list(code){
+		var s_list = [];
+		$.each(stock_list,function(i,n){
+			if(n.code.indexOf(code)!=-1){
+				s_list.push(n);
+			}
+		});
+		return s_list;
+	}
+    </script>
+</body>
+</html> 
+
+
