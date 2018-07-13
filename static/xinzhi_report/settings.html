@@ -130,10 +130,24 @@
     </div>
     <!-- Javascript -->          
     <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
     <script type="text/javascript">
     	$(function(){
     		$('#data_update').click(function(){
-    			alert('系统更新')
+    			
+    			$.ajax({
+					type: 'GET',
+					url: base_url+'download/download_stock/',
+					dataType: 'json',
+					success: function(data){
+						console.log(data);
+						if(data.code==0){
+							
+						} else{
+							console.log(data);
+						}
+					}
+				});
     		});
     	});
     </script>
