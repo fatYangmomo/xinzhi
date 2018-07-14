@@ -15,6 +15,13 @@ class Stock(models.Model):
 	# 股份名称
 	stock_name = models.CharField(max_length=50,verbose_name=u"股份名称")
 	# 所属板块
+	# 1：上证50
+	# 2：沪深300
+	# 3：上证50，沪深300
+	# 4：MSCI
+	# 5：上证50，MSCI
+	# 6：沪深300，MSCI
+	# 7： 上证50，沪深300，MSCI
 	plate = models.CharField(max_length=10,null=True,verbose_name=u"所属板块")
 
 	def __str__(self):
