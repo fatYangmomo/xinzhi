@@ -3,5 +3,5 @@ from ..views import DownloadStock
 
 urlpatterns = [
 	# 股份列表下载
-    url(r'^download_stock/$',DownloadStock.as_view(),name='download_stock'),
+    url(r'^stock/$',DownloadStock.as_view(),name='download_stock'),
 ]

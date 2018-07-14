@@ -134,15 +134,27 @@
     <script type="text/javascript">
     	$(function(){
     		$('#data_update').click(function(){
-    			
+    			console.log('begin');
     			$.ajax({
 					type: 'GET',
-					url: base_url+'download/download_stock/',
+					url: base_url+'download/stock/',
 					dataType: 'json',
 					success: function(data){
 						console.log(data);
 						if(data.code==0){
-							
+							$.ajax({
+								type: 'GET',
+								url: base_url+'analyse/stock/',
+								dataType: 'json',
+								success: function(data){
+									console.log(data);
+									if(data.code==0){
+										
+									} else{
+										console.log(data);
+									}
+								}
+							});
 						} else{
 							console.log(data);
 						}
