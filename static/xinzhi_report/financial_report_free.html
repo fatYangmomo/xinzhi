@@ -12,9 +12,7 @@
     <link rel="stylesheet" href="css/ownStyle.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-	<link rel="stylesheet" type="text/css" href="css/skin_/table.css" />
-	<link rel="stylesheet" type="text/css" href="css/jquery.grid.css" />   
+    <link rel="stylesheet" href="css/style.css">
     <style type="text/css">
     	.btn{
     		width: 160px;
@@ -23,22 +21,50 @@
     		line-height: 14px;
     		margin-left: 20px;
     	}
-    	select{
-    		
+    	.search-box div{
+    		display: inline-block;
     	}
-    	.search-box{
-    		margin-bottom: 0;
+    	/*我的组合*/
+    	.group-box{
+    		background-color: #fff;
+    		border: 1px solid #C1C1C1;
+    		margin: 0 5px 0 0;
+    		width: 90px;
+    		height: 30px;
+    		font-size: 13px;
     	}
-    	.table .opt{
-    		margin-bottom: 0;
+    	.my_group_c{
+    		width: 140px;
+    		height: 120px;
+    		position: absolute;
+    		border: 1.5px solid #DCDCDC;
+    		z-index: 10;
+    		background-color: #fff;
+    		padding-bottom: 2px;
+    		overflow-y: scroll;
+    		overflow-x: hidden;
+    		display: none;
     	}
-    	.kv-item{
-    		float: left;
-    		margin-bottom: 0;
+    	.my_group_c a{
+    		margin: 0 1px 0 1px;
     	}
-    	#div_group{
-    		float: left;
+    	.my_group_c tr:hover{
+    		background-color: #DCDCDC;
     	}
+    	.my_group_c table{
+    		table-layout: fixed;
+    	}
+    	.my_group_c td{
+    		text-align: center;
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+    		word-break: keep-all;
+    		white-space: nowrap;
+    	}
+    	#my_group_c,#group_remove_c{
+    		display: none;
+    	}
+    	/*组合*/
     	.group{
     		background-color: #DCDCDC;
     		border: 1px solid #C1C1C1;
@@ -49,15 +75,18 @@
     		font-size: 13px;
     	}
     	.btn-choose{
-    		background-color: #F5F5F5;
+    		background-color: #fff;
     	}
     	.btn-small{
     		width: 60px;
     		height: 25px;
     	}
-    	.kv-item input[type=text]{
-    		width: 100px;
-    		padding: 0 5px;
+    	.input-small{
+    		width: 150px;
+    		height: 25px;
+    	}
+    	.search-box{
+    		margin: 8px;
     	}
     	#group-add{
     		display: none;
@@ -69,217 +98,284 @@
     <div class="myheader">
     	<span class="mytitle">信致人工智能分析企业财报系统</span>
     </div>
-    <div id="container" class="div_data">
-    	<div id="hd"></div>
-	    <div id="bd">
-	    	<div id="main">
-            	<div class="search-box ue-clear">
-	            	<div class="search-area">
-	            		<div id="div_group">
-	                        <div class="kv-item-content">
-	                            <button class="group btn-choose">组合1</button>
-	                        </div>
-	                        <div class="kv-item-content">
-	                            <button class="group">组合2</button>
-	                        </div>
-	                    </div>
-                        <div class="kv-item-content">
-	                        <button class="group" onclick="group_add(1)"><i class="fa fa-plus"></i>&nbsp;组合</button>
+    <div id="container" class="ml-10 mr-10">
+	    <div id="main">
+        	<div class="search-box">
+            	<div class="">
+            		<button id="group_all" class="group">查看全部</button>
+            		<div>
+            			<button id="my_group" class="group-box">我的组合&nbsp;<i class="fa fa-caret-down"></i></button>
+						<div id="my_group_c" class="my_group_c scroll-bar">
+							<table>
+                        		<tbody>
+                        			<tr>
+                        				<td>组合1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</td>
+                        				<td>
+                        					<a title="编辑" onclick="group_edit('id')"><i class="fa fa-edit"></i></a>
+											<a title="删除" onclick="group_delete('id')"><i class="fa fa-remove"></i></a>
+                        				</td>
+                        			</tr>
+                        			<tr>
+                        				<td>组合2</td>
+                        				<td>
+                        					<a title="编辑" onclick="group_edit('id')"><i class="fa fa-edit"></i></a>
+											<a title="删除" onclick="group_delete('id')"><i class="fa fa-remove"></i></a>
+                        				</td>
+                        			</tr>
+                        		</tbody>
+							</table>
+						</div>
+            		</div>
+            		<div id="div_group">
+                        <div class="">
+                            <button class="group btn-choose">组合1</button>
                         </div>
-                        <div class="kv-item" id="group-add">
-	                        <input type="text" id="group-name"/>
-	                        <button class="group btn-small" onclick="group_add(2)">确定</button>
+                        <div class="">
+                            <button class="group">组合2</button>
                         </div>
-	                </div>
-	            </div>
-			    <div class="table">
-	            	<div class="opt ue-clear"> 
-	                	<span class="optarea">
-	                        <a href="javascript:;" class="delete">
-	                            <i class="icon"></i>
-	                            <span class="text">删除</span>
-	                        </a>
-	                    </span>
-	                    <div class="search-box search-area">
-		                    <div class="kv-item mt-5">
-	                            <select>
-	                                <option>移动到</option>
-	                                <option>组合1</option>
-	                                <option>组合2</option>
-	                            </select>
-	                        </div>
-                        </div>
-	                </div>
-	                
-	                <div class="grid"></div>
-	                
-	                <div class="pagination"></div>
-	            </div>
-	        </div>
-	    </div>
+                    </div>
+                    <div class="">
+                        <button class="group" onclick="group_add(1)"><i class="fa fa-plus"></i>&nbsp;组合</button>
+                    </div>
+                    <div class="" id="group-add">
+	                    <input type="text" id="group-name" class="input-text input-small"/>
+                        <button class="group btn-small" onclick="group_add(2)">确定</button>
+                    </div>
+             	</div><br>
+                <div class="mt-10">
+                	<button id="stock_delete" class="group">删除</button>
+            		<div>
+            			<button id="group_remove" class="group-box">移动到&nbsp;<i class="fa fa-caret-down"></i></button>
+						<div id="group_remove_c" class="my_group_c scroll-bar">
+							<table>
+                        		<tbody>
+                        			<tr>
+                        				<td><a onclick="group_remove('id')">组合1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq</a></td>
+                        			</tr>
+                        			<tr>
+                        				<td><a onclick="group_remove('id')">组合</a></td>
+                        			</tr>
+                        			<tr>
+                        				<td><a onclick="group_remove('id')">组合</a></td>
+                        			</tr>
+                        		</tbody>
+							</table>
+						</div>
+            		</div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10">
+		<table class="table table-border table-bordered table-hover table-bg table-sort">
+			<thead>
+				<tr class="text-c">
+					<th><input type="checkbox" id="stock_check_all"></th>
+					<th>股份代码</th>
+					<th>股票名称</th>
+					<th>报告日期</th>
+					<th>总资产</th>
+					<th>总股本</th>
+					<th>营业收入</th>
+					<th>净利润</th>
+					<th>营业收入增长率</th>
+					<th>净利润增长率</th>
+					<th>每股净资产</th>
+					<th>净资产收益率</th>
+					<th>每股收益</th>
+					<th>历史市盈率</th>
+					<th>历史市净率</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody id="">
+				
+			</tbody>
+		</table>
+		</div>
     </div>
     <!-- Javascript -->          
     <!--<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>-->
+    <script type="text/javascript" src="js/base.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/global.js"></script>
-	<script type="text/javascript" src="js/jquery.select.js"></script>
-	<script type="text/javascript" src="js/core.js"></script>
-	<script type="text/javascript" src="js/jquery.pagination.js"></script>
-	<script type="text/javascript" src="js/jquery.grid.js"></script>
+    <script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/datatable_init.js"></script>
+    
     <script type="text/javascript">
-    	$('select').select();
-		var head = [{
-				label: '排名',
-				width: 30,
-//				sortable: 'default',
-				name: 'id'	
-			},{
-				label:'股票代码',
-				width: 50,
-//				sortable: 'default',
-				name:'code'	
-			},{
-				label:'股票名称',
-				width:100	
-			},{
-				label: '报告日期',
-				width: 100	
-			},{
-				label: '总股本',
-				minWidth: 150	
-			},{
-				label: '营业收入',
-				width: 100	
-			},{
-				label: '净利润',
-				width:80	
-			},{
-				label: '营业收入增长率',
-				width:100	
-			},{
-				label: '净利润增长率',
-				width:100	
-			},{
-				label: '每股净资产',
-				width:100	
-			},{
-				label: '净资产收益率',
-				width:100	
-			},{
-				label: '每股收益',
-				width:100	
-			},{
-				label: '当前价格',
-				width:100	
-			},{
-				label: '市盈率',
-				width:100	
-			},{
-				label: '市净率',
-				width:100	
-			}];
-			
-		var oper = [{label:'加入自选',onclick: function(){
-					alert('加入自选');
-				}}]
-		var tbody = [
-					["1","000000","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["2","000001","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["3","000002","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["4","000003","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["5","000004","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["6","000005","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["7","000006","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["8","000007","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["9","000008","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["10","000009","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["11","000010","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["12","000011","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["13","000012","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["14","000013","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
-					["15","000014","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper]]
-					
-		$('.grid').Grid({
-			thead: head,
-			tbody: null,
-			height:500,
-			checkbox: {
-				single:true	
-			},
-			operator: {
-				type : "normal",
-				width : 100	
-			},
-			sortCallBack : function(name,index,type){
-				table_sort(name,index,type);
-			}
-		});
-	
-	$('.grid').Grid('addLoading');
-	
-	//
-	setTimeout(function(){
-		$('.grid').Grid('setData',tbody, head);
-	},2000)
-	
-	$('.pagination').pagination(100,{
-		callback: function(page){
-			alert(page);
-		},
-		display_msg: false
-	});
-	
-//	$('.search-box input[type=radio]').click(function(e) {
-//      if($(this).prop('checked')){
-//			if($(this).attr('data-define') === 'define'){
-//				$('.define-input').show();
-//			}else{
-//				$('.define-input').hide();
-//			}
-//		}
-//  });
-    function table_sort(name,index,type){
-    	alert(name+","+index+','+type);
-    	$('.grid').Grid('addLoading');
-    	var tbody = [
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper], 
-			["201302","uimaker1","小牛","山东济南","山东大学","1989-10-18","已审核",oper],
-			["201301","admin1","熊猫王子","江苏南京","南京林业大学","1982-10-18","已审核",oper]]
-    	setTimeout(function(){
-			$('.grid').Grid('setData',tbody, head);
-		},2000)
-    }
     $(function(){
-    	
+    	var jsonObj = {};
+        jsonObj.limit = 10;
+        init_table(jsonObj, lang);
     });
-    //点击组合
+    function init_table(dataJson, lang) {
+    	data = []
+    	for(var i=0;i<99;i++){
+    		d = {}
+    		d["id"] = i;
+    		d["code"] = "0000" + (200-i);
+    		d["name"] = "银行" + i;
+    		data.push(d);
+    	}
+        $('.table-sort').dataTable({
+            "language": lang,  //提示信息
+			"orderMulti": false,  //启用多列排序
+            "order": [],  //取消默认排序查询,否则复选框一列会出现小箭头
+            "bFilter": false,       //是否搜索栏
+            "iDisplayLength": dataJson.limit,//默认每页数量
+            "bPaginate": true,       //是否显示分页器
+            "bInfo": true,			//页脚信息
+            "sPaginationType": "full_numbers", //分页样式
+            "bLengthChange": false,   //是否显示每页大小的下拉框
+            "keys": true,
+            "destroy": true,
+            "bProcessing": true, //是否显示加载
+//          "sAjaxSource": base_url + "", //请求资源路径
+//			"ajax": {
+//              url: "",
+//              dataSrc: function(result) {
+//                  //这里result和上面jquery的ajax的代码类似，也是可以得到data.json的数据，但是这样的格式，Datatables不能直接使用，这时候需要在这里处理一下
+//                  //直接返回Datatables需要的那部分数据即可
+//                  return result.data;
+//              }
+//          },
+			"data": data, //请求资源
+            "processing": true,  //隐藏加载提示,自行处理
+            //列的每一项,在这里一下的数据都是生成表单和填充数据,每一列的数据,都是一个单元格
+            "columns": [
+                {
+                    "data": "id",
+                    "class": "text-c",
+                    "orderable": false, // 禁用排序
+					render: function (data, type, full, meta) {//meta包含当前行的索引,当前DataTables控件的setttings对象,当前DataTables控件的setttings对象,row,colsettings
+						return '<input type="checkbox" class="" name="stock_check" value="' + data + '" />';
+					}
+                },{
+                    "data": "code",
+                    "class": "text-c",
+                    "orderable": true // 禁用排序
+                },{
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": true // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": true // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "name",
+                    "class": "text-c",
+                    "orderable": false // 禁用排序
+                }, {
+                    "data": "id", //compensation_id
+                    "class": "text-c",
+                    "orderable": false, // 禁用排序
+                    "render": function (data, type, full, meta) {
+						var inner = "";
+						inner += "<a onclick=\"javascript:join_free('" + data + "',this);\"><i class=\"fa fa-check\"></i></a>";
+                        return inner;
+                    }
+                }]
+        });
+    }
+    $("#stock_delete").click(function(){
+    	stock_batch_delete();
+    });
+    /*全选*/
+    $("#stock_check_all").click(function(){
+    	if($(this).is(":checked"))
+    		$("input[name=stock_check]").prop("checked",true);
+    	else
+    		$("input[name=stock_check]").prop("checked",false);
+    });
+    //点击任意位置隐藏
+    $(document).click(function(){
+	    $("#my_group_c").hide();
+	    $("#group_remove_c").hide();
+	});
+	//防止事件冒泡
+	$("#my_group").click(function(event){
+	    event.stopPropagation();
+	});
+	$("#group_remove").click(function(event){
+	    event.stopPropagation();
+	});
+	$("#my_group_c").click(function(event){
+	    event.stopPropagation();
+	});
+	$("#group_remove_c").click(function(event){
+	    event.stopPropagation();
+	});
+    /*点击我的组合*/
+    $("#my_group").click(function(){
+    	if($("#my_group_c").css("display")=="none")
+    		$("#my_group_c").show();
+    	else
+    		$("#my_group_c").hide();
+    });	
+    /*点击移动到*/
+    $("#group_remove").click(function(){
+    	if($("#group_remove_c").css("display")=="none")
+    		$("#group_remove_c").show();
+    	else
+    		$("#group_remove_c").hide();
+    });	
+    /*点击组合*/
     $("#div_group .group").click(function(){
     	$("#div_group .group").each(function(){
     		$(this).removeClass("btn-choose");
     	});
     	$(this).addClass("btn-choose");
     });
-    //添加组合
+    /*添加组合*/
     function group_add(oper){
-    	if(oper==1)
-    		$("#group-add").show();
+    	if(oper==1){
+    		$("#group-add").css("display","inline-block");
+    	}
 		else{
 			var group_name = $("#group-name").val();
 			if(group_name!=""){
 				var html = $("#div_group").html();
-				html += '<div class="kv-item-content">';
+				html += '<div class="">';
 				html += '<button class="group">'+group_name+'</button>';
 				html += '</div>';
 				$("#div_group").html(html);
@@ -295,6 +391,82 @@
 		    });
 		}
     }
+    /*组合-编辑*/
+    function group_edit(group_id){
+   		console.log("edit")
+   		console.log(group_id)
+    }
+    /*组合-删除*/
+   	function group_delete(group_id){
+   		layer.confirm('将删除其下所有个股，是否继续？',function(index){
+			$.ajax({
+				type: 'DELETE',
+				url: base_url+'/',
+				dataType: 'json',
+				error:function(data) {layer.msg('服务器错误', {icon: 2, time: 1000});},
+				success: function(data){
+					if(data.code==0){
+						layer.msg('已删除!',{icon:1,time:1000});
+						
+					} else{
+						console.log(data);
+						layer.msg('未能成功删除!',{icon:2,time:1000},function(){
+							layer.alert(data.desc);
+						});
+					}
+				}
+			});
+		});
+   	}
+   	/*股份删除*/
+   	function stock_batch_delete(){
+		var stock_check = document.getElementsByName("stock_check");
+		var length = stock_check.length;
+		var is_check = false;//是否
+		for(var i=0; i<length;i++){
+			var check = stock_check[i];
+			if(check.checked==true){
+				console.log(check.value);
+	    		is_check = true;
+			}
+		}
+		if(!is_check){
+			layer.msg('请选择!',{icon:0,time:1000});
+		} else{
+			layer.confirm('确认删除？',function(index){
+				$.ajax({
+					type: 'DELETE',
+					url: base_url+"/",
+					async:true,
+					dataType: 'json',
+					error:function(data) {layer.msg('服务器错误', {icon: 2, time: 1000});},
+					success: function(data){
+						if(data.code==0){
+							layer.msg('已删除!',{icon:1,time:1000},function(){
+								
+							});
+						} else{
+							console.log(data);
+							layer.msg('未能删除成功!',{icon:2,time:1000},function(){
+								
+							});
+						}
+					}
+				});
+			});
+		}
+    }
+   	/*移动*/
+   	function group_remove(group_id){
+   		console.log("remove");
+   		console.log(group_id);
+   	}
+   	/*加入自选*/
+   	function join_free(stock_id,o){
+   		console.log("加入自选");
+   		layer.msg("成功加入自选")
+   		o.innerHTML = "";
+   	}
     </script>
 </body>
 </html> 

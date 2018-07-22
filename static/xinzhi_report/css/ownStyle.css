@@ -29,24 +29,40 @@
 .inline-block{
 	display: inline-block;
 }
-.b_red{
+.b-red{
 	border:1px solid red;
 }
-.mt-5{
-	margin-top: 5px;
+select{
+	width: 100px;
+	height:30px;
 }
-.mt-10{
-	margin-top: 10px;
+.bg-white{
+	background-color: #fff;
 }
-.mb-5{
-	margin-bottom: 5px;
+
+/*滚动条样式*/
+.scroll-bar::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 6px;
 }
-.mb-10{
-	margin-bottom: 10px;
+.scroll-bar::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.2);
 }
-.c_red{
-	color: red;
+.scroll-bar::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0;
+    background: rgba(0,0,0,0.1);
 }
-.text_right{
-	text-align: right;
+.span-text{
+	margin: 1px 0px 1px 5px;
+	font-size: 12px;
+}
+.hover-gray:hover{
+	background-color: #DCDCDC;
+}
+a{color: blue;}
+a:hover{
+	text-decoration: none;
 }

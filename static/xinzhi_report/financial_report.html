@@ -54,21 +54,6 @@
     		text-align: center;
     		width: 100px;
     	}
-    	/*滚动条样式*/
-	    #stock_table::-webkit-scrollbar {/*滚动条整体样式*/
-	        width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
-	        height: 6px;
-	    }
-	    #stock_table::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-	        border-radius: 5px;
-	        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-	        background: rgba(0,0,0,0.2);
-	    }
-	    #stock_table::-webkit-scrollbar-track {/*滚动条里面轨道*/
-	        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-	        border-radius: 0;
-	        background: rgba(0,0,0,0.1);
-	    }
     </style>
 </head> 
 
@@ -174,12 +159,12 @@
 		var head = [{
 				label: '排名',
 				width: 30,
-//				sortable: 'default',
+				sortable: 'desc',
 				name: 'id'	
 			},{
 				label:'股票代码',
 				width: 50,
-//				sortable: 'default',
+				sortable: 'default',
 				name:'code'	
 			},{
 				label:'股票名称',
@@ -222,8 +207,10 @@
 				width:100	
 			}];
 			
-		var oper = [{label:'加入自选',onclick: function(){
-					alert('加入自选');
+		var oper = [{label:'加入自选',onclick: function(a){
+//					alert('加入自选');
+					var g = $('.grid');
+					console.log($(this));
 				}}]
 		var tbody = [
 					["1","<a href='javascript:alert(0);'>000000</a>","浦发","2017-12-31","1000000000","10000000","10000000","31%","22%","12561","12%","1222","","1","1",oper],
@@ -263,7 +250,7 @@
 	//
 	setTimeout(function(){
 		$('.grid').Grid('setData',tbody, head);
-	},2000)
+	},1000)
 	
 	$('.pagination').pagination(100,{
 		callback: function(page){
