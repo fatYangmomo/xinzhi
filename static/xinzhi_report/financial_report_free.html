@@ -26,7 +26,7 @@
     	}
     	/*我的组合*/
     	.group-box{
-    		background-color: #fff;
+    		background-color: #DCDCDC;
     		border: 1px solid #C1C1C1;
     		margin: 0 5px 0 0;
     		width: 90px;
@@ -64,11 +64,15 @@
     	#my_group_c,#group_remove_c{
     		display: none;
     	}
+    	/*#main_top{
+    		width: 100%;
+    		border-bottom: 2px solid #C1C1C1;
+    	}*/
     	/*组合*/
     	.group{
     		background-color: #DCDCDC;
     		border: 1px solid #C1C1C1;
-    		border-bottom: hidden;
+    		/*border-bottom: hidden;*/
     		margin: 0 5px 0 0;
     		width: 90px;
     		height: 30px;
@@ -101,8 +105,7 @@
     <div id="container" class="ml-10 mr-10">
 	    <div id="main">
         	<div class="search-box">
-            	<div class="">
-            		<button id="group_all" class="group">查看全部</button>
+            	<div id="main_top" class="">
             		<div>
             			<button id="my_group" class="group-box">我的组合&nbsp;<i class="fa fa-caret-down"></i></button>
 						<div id="my_group_c" class="my_group_c scroll-bar">
@@ -127,8 +130,11 @@
 						</div>
             		</div>
             		<div id="div_group">
+            			<div class="">
+                            <button class="group btn-choose">查看全部</button>
+                        </div>
                         <div class="">
-                            <button class="group btn-choose">组合1</button>
+                            <button class="group">组合1</button>
                         </div>
                         <div class="">
                             <button class="group">组合2</button>
@@ -311,12 +317,13 @@
                     "orderable": false, // 禁用排序
                     "render": function (data, type, full, meta) {
 						var inner = "";
-						inner += "<a onclick=\"javascript:join_free('" + data + "',this);\"><i class=\"fa fa-check\"></i></a>";
+						inner += "<a onclick=\"javascript:stock_delete('" + data + "');\" title='从组合中移除'><i class=\"fa fa-remove\"></i></a>";
                         return inner;
                     }
                 }]
         });
     }
+    /*点击删除*/
     $("#stock_delete").click(function(){
     	stock_batch_delete();
     });
@@ -461,11 +468,29 @@
    		console.log("remove");
    		console.log(group_id);
    	}
-   	/*加入自选*/
-   	function join_free(stock_id,o){
-   		console.log("加入自选");
-   		layer.msg("成功加入自选")
-   		o.innerHTML = "";
+   	/*个股删除*/
+   	function stock_delete(stock_id){
+   		layer.confirm('确认删除？',function(index){
+			$.ajax({
+				type: 'DELETE',
+				url: base_url+"/",
+				async:true,
+				dataType: 'json',
+				error:function(data) {layer.msg('服务器错误', {icon: 2, time: 1000});},
+				success: function(data){
+					if(data.code==0){
+						layer.msg('已删除!',{icon:1,time:1000},function(){
+							
+						});
+					} else{
+						console.log(data);
+						layer.msg('未能删除成功!',{icon:2,time:1000},function(){
+							
+						});
+					}
+				}
+			});
+		});
    	}
     </script>
 </body>
